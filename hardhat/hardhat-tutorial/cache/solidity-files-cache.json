@@ -1,0 +1,40 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/Users/siyunhe/project/Seacows-Research/hardhat/hardhat-tutorial/contracts/Token.sol": {
+      "lastModificationDate": 1659780658277,
+      "contentHash": "38197bb9748bc29cd39d6261af93fd3b",
+      "sourceName": "contracts/Token.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.9"
+      ],
+      "artifacts": [
+        "Token"
+      ]
+    }
+  }
+}
