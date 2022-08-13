@@ -25,7 +25,7 @@ contract SimpleStorage {
     // "functions" or "Methods " execute a subset of code when called
     function store(uint256 _favoriteNumber) public {
         favoriteNumber = _favoriteNumber;
-        uint256 testVar = 5;
+        //uint256 testVar = 5;
         //favoriteNumber = favoriteNumber + 1; //amount of gas increased, the more stuff we do, more gas fee.
 
     }
@@ -77,10 +77,73 @@ contract SimpleStorage {
     People public person = People({favoriteNumber: 2, name: "Patrick"});
 
     //<Array: An array is a data structure that holds a list of other types>    
-    
-
     struct People{
         uint256 favoriteNumber;
         string name;
     }
+
+    //make a people array for more elegant 
+    //<dynamic array vs fixed-size array>, this is a dynamic array
+    People[] public people; //<our array(list) is currently empty!>
+    //People[3]
+    // 0: 2, Patrick , 1: 7, John
+
+   //uint256[] public favoriteNumberList;
+
+    //a function add people who are people array
+    // memory keyword
+    function addPerson(string memory _name, uint256 _favoriteNumber) public {
+        //method1: 
+        //people.push(People(_favoriteNumber, _name));
+        
+        //method2:
+        //People memory newPerson = People({favoriteNumber: _favoriteNumber, name: _name});
+        
+        // method3 
+        //People memory newPerson = People(_favoriteNumber, _name);
+        //people.push(newPerson);
+
+        //method4:
+        people.push(People(_favoriteNumber, _name));
+        nameToFavoriteNumber[_name] = _favoriteNumber;
+    }
+
+
+    //<<BASIC SOLIDITY ERROR & WARNINGS>>
+    //< Warning won't stop your code from working/compiling 
+    // but it's usually a good idea to check them our>
+
+    //****************************************************
+    //<<BASIC SOLIDITY: Memory, Storage, &Calldata(Intro)>>
+
+    //EVM Overview:
+    /*
+    EVM can access and store information in six places:
+    1. Stack
+    2. Memory*
+    3. Storage*
+    4. Calldata*
+    5. Code
+    6. Logs
+    */
+
+    /*
+    Calldata and memory : variable exists temperarilty 
+    Storage: permanent var can be modified, torage vars existed even out of functions executing
+    calldata: temporary var can be modified
+    memory: temporary var can not be modified
+
+    Sidework:
+    From CS241 OS class: stack vs (Memory allocating)
+    */
+    //****************************************************
+
+    //<BASIC SOLIDITY MAPPINGS>
+    // data structuure mapping: ~dictionary
+    /* a mapping is a data structure where a key is "mapped" to a single value*/
+    // initlized to zero value
+    mapping(string => uint256) public nameToFavoriteNumber;
+
+
+
 }
