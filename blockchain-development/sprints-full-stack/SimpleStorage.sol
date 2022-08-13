@@ -146,4 +146,8 @@ contract SimpleStorage {
 
 
 
+    /*Recap: THe EVM & A recap of lesson2 */
+    //EVM: Ethereum Virtual Machine
+    // EVM compatible: Avaalanche, Fantom, Polygon
 }
+
