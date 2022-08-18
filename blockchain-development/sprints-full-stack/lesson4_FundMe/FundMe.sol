@@ -20,10 +20,6 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 //Chailink aggregatorV3 Interface
 
 
-
-
-
-
 contract FundMe {
 
     /*uint256 public number;*/
@@ -44,6 +40,8 @@ contract FundMe {
         /*number = 5;            */
         //keyword to access msg
         /*require(msg.value > 1e18, "Didn't send enough! " ); // 1e18 = 1 * 10 **18 = 1000000000000000000 */
+
+        //Library: msg.value.getConversionRate();
         require(getConversionRate(msg.value) >= minimumUsd, "Didn't send enough!"); 
         funders.push(msg.sender);
         addressToAmountFunded[msg.sender] = msg.value;
@@ -130,10 +128,12 @@ contract FundMe {
 // FLOATING POINT MATH IN SOLIDITY 
 // BASIC Solidity: Arrays && Structs II
 // Review Interfaces, Github imports, &Math in solidity
+// Concept of Library: https://solidity-by-example.org/library/
 
 // Reference:
 /*
 1. https://github.com/smartcontractkit/chainlink/blob/develop/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol
+2. https://solidity-by-example.org/library/
 
 
 */
