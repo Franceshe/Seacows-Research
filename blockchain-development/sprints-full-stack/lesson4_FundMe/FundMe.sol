@@ -4,7 +4,7 @@ pragma solidity ^0.8.8;
 
 //import directly from github or npm
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
-
+import "./PriceConverter.sol";
 
 
 // Sending ETH Through a function & Reverts.
@@ -22,6 +22,8 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 contract FundMe {
 
+    using PriceConverter for uint256;  
+    
     /*uint256 public number;*/
 
     uint256 public minimumUsd = 50 * 1e18 ; // 1 * 10 ** 18 
@@ -42,7 +44,8 @@ contract FundMe {
         /*require(msg.value > 1e18, "Didn't send enough! " ); // 1e18 = 1 * 10 **18 = 1000000000000000000 */
 
         //Library: msg.value.getConversionRate();
-        require(getConversionRate(msg.value) >= minimumUsd, "Didn't send enough!"); 
+        require(msg.value.getConversionRate() >= minimumUsd, "Didn't send enough!"); 
+        //require(getConversionRate(msg.value) >= minimumUsd, "Didn't send enough!"); 
         funders.push(msg.sender);
         addressToAmountFunded[msg.sender] = msg.value;
         //require as checker, otherwise raise error
@@ -63,47 +66,39 @@ contract FundMe {
     
 
     }
-            // get price eth interms of usd
-        function getPrice() public view returns(uint256) {
-            // an instance of contract which need to interact with outside data
-            // we need two things
-            // 1. ABI How to get ABI? => Interface!
-            // 2. Address of contract: 0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e
-            // Testnet network: Georli
-            // ETH/USD contract: 0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e
-            AggregatorV3Interface priceFeed = AggregatorV3Interface(0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e);
-            //(uint80 roundId, int price, uint startedAt, uint timeStamp, uint80 answeredInRound ) =  priceFeed.latestRoundData();    
-            (,int256 price,,, ) =  priceFeed.latestRoundData();   
-            // ETH interms of USD
-            // 1800.00000000  -> 1e8
-            //price is int256 or int instead of uint since sometimes pricefeeds could be negative
-            return uint256(price * 1e10); // 1**10 = 10000000000, to get price match up
 
-            //type casting, convert int256->uint256
+    //withdraw the amount funded to the contract
+    //need to reset funders[] and addressToAmountFunded;
+
+    function withdraw() public{
+        // Concept: for loop
+        for(uint256 founderIndex = 0; founderIndex < funders.length; founderIndex++){
+            address funder = funders[founderIndex];
+            addressToAmountFunded[funder] = 0;
 
         }
 
-        //Interface
-        //for this func, we need a real testnet to work with oracles
-        function getVersion() public view returns (uint256){
-            AggregatorV3Interface priceFeed = AggregatorV3Interface(0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e);
-            return priceFeed.version();
+        //reset the array
+        //Solidity: resetting array
+        funders = new address[](0);
 
-        }
+        //actully withdraw the funds
 
+        //Sending eth from contract
+        //There are three ways to do it
+        /*
+        1.transfer
+        2.send
+        3.call
+        */
 
+        //transfer
+        //msg.sender = address
+        //payaable(msg.sender) = address, here we use type casting
+        // this refers to the contract
+        payable(msg.sender).transfer(address(this).balance);
 
-        function getConversionRate(uint256 ethAmount) public view returns (uint256){
-            uint256 ethPrice = getPrice();
-            // 1800_000000000000000000(18 0's) = ETH / USD price
-            //    1_000000000000000000 ETH
-              
-            uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1e18;
-             
-            //NOTE: always multiple before you divide
-            return ethAmountInUsd;
-
-        }
+    }
 
 //    function withdraw(){}
 }
@@ -116,19 +111,23 @@ contract FundMe {
 * To: address that the tx is sent to
 * Value: amount of wei to send
 * Data: What to send to the To address
-* v,r,s: components of tx signture
-
+* v,r,s: components of tx signture 
+ 
 // Eth unit converter: eth-converter.com
 */
 
 // Smart contract can hold funds just like how wallets can
 
 
+/*Topics covered:*/
 // INTERFACE && PRICEFEED
 // FLOATING POINT MATH IN SOLIDITY 
 // BASIC Solidity: Arrays && Structs II
 // Review Interfaces, Github imports, &Math in solidity
 // Concept of Library: https://solidity-by-example.org/library/
+// SafeMath, Overflow, Checking, and the "unchecked" keyword
+// Solidity for loops
+  
 
 // Reference:
 /*
