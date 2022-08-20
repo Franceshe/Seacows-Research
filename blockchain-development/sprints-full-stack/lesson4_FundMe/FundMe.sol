@@ -35,6 +35,14 @@ contract FundMe {
     // a maaping for people - how much they sent
     mapping(address => uint256) public addressToAmountFunded;
 
+    //only the ownder of the contract can call withdraw()
+    //set the owner
+    address public owner;
+
+   constructor(){
+       owner = msg.sender;
+   }
+    
     function fund() public payable {
         //want to be able to set a minum fund amount in usd
         //1. How do we send ETH to this contract
@@ -70,7 +78,11 @@ contract FundMe {
     //withdraw the amount funded to the contract
     //need to reset funders[] and addressToAmountFunded;
 
-    function withdraw() public{
+    function withdraw() public onlyOwner{
+        //required the owner to be able to call withdraw()
+        //require(msg.sender == owner, "Sender is not owner");
+        // we can use function modifier to reduce redundant work
+
         // Concept: for loop
         for(uint256 founderIndex = 0; founderIndex < funders.length; founderIndex++){
             address funder = funders[founderIndex];
@@ -92,11 +104,29 @@ contract FundMe {
         3.call
         */
 
-        //transfer
+        //1.transfer(_, throws an error)
         //msg.sender = address
-        //payaable(msg.sender) = address, here we use type casting
+        //payable(msg.sender) = address, here we use type casting
         // this refers to the contract
-        payable(msg.sender).transfer(address(this).balance);
+        /*payable(msg.sender).transfer(address(this).balance);*/
+
+        //2.send(_, bool)
+        /*bool sendSuccess = payable(msg.sender).send(address(this).balance);
+        require(sendSuccess, "Send failed");*/
+ 
+        // 3. call: **
+        //(bool callsuccess, bytes memory dataReturned) = payable(msg.sender).call{value: address(this).balance}("");
+        // since we don't care about dat aReturned, ignore it
+        (bool callsuccess, ) = payable(msg.sender).call{value: address(this).balance}("");
+        require(callsuccess, "Call failed");
+
+        //here call is the recommended method, although for most part
+        //It can be case-by-case
+    }
+
+    modifier onlyOwner {
+        require(msg.sender == owner, "Sender is not ownder!");
+        _; // call rest of the code
 
     }
 
@@ -127,7 +157,10 @@ contract FundMe {
 // Concept of Library: https://solidity-by-example.org/library/
 // SafeMath, Overflow, Checking, and the "unchecked" keyword
 // Solidity for loops
-  
+// Sending either: transfer/send/call
+// Constructor
+// Basic solidity modifier
+
 
 // Reference:
 /*
@@ -136,3 +169,8 @@ contract FundMe {
 
 
 */
+
+//testing for wei
+//for current eth price:$1800
+// 50/1800 +=0.027ETH
+// 0.027ETH = 27000000000000000 Wei
