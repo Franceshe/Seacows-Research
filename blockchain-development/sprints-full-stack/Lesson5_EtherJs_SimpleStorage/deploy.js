@@ -15,10 +15,9 @@
 // Rejected
 
 async function main() {
-  console.log("hi");
-  let variable = 5;
-  console.log(variable);
   // deploy a contract? Wait for it to be deployed
+  // compile them in our code
+  // compile them separtely
 }
 
 main()
@@ -27,3 +26,6 @@ main()
     console.error(error);
     process.exit(1);
   });
+
+// reference:
+// 1. Javascript bindings for the Solidity compiler:  https://github.com/ethereum/solc-js
