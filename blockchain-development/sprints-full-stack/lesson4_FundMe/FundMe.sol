@@ -20,6 +20,9 @@ import "./PriceConverter.sol";
 //Chailink aggregatorV3 Interface
 
 
+//custom error 
+error NotOwner();
+
 contract FundMe {
 
     using PriceConverter for uint256;  
@@ -37,7 +40,12 @@ contract FundMe {
 
     //only the ownder of the contract can call withdraw()
     //set the owner
-    address public owner;
+    
+    address public immutable i_owner;
+    /*address public owner; */
+
+    // 21,508 gas - immutable
+    // 23,644 gas - non-immutable
 
    constructor(){
        owner = msg.sender;
@@ -125,7 +133,8 @@ contract FundMe {
     }
 
     modifier onlyOwner {
-        require(msg.sender == owner, "Sender is not ownder!");
+        //require(msg.sender == i_owner, "Sender is not ownder!");
+        if(msg.sender != i_owner){revert NotOwner(); };
         _; // call rest of the code
 
     }
@@ -160,6 +169,8 @@ contract FundMe {
 // Sending either: transfer/send/call
 // Constructor
 // Basic solidity modifier
+// Constant/Immutable-save gas
+// Custom Erros
 
 
 // Reference:
