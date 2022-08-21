@@ -139,6 +139,18 @@ contract FundMe {
 
     }
 
+    // What happens if someone sends this contract ETH without calling the fund function
+
+    // receive() 
+    // fallback()
+    receive() external payable{
+        fund();
+    }
+
+    fallback() external payable{
+        fund();
+    }
+
 //    function withdraw(){}
 }
 
@@ -169,8 +181,10 @@ contract FundMe {
 // Sending either: transfer/send/call
 // Constructor
 // Basic solidity modifier
+/*advanced solidily */
 // Constant/Immutable-save gas
 // Custom Erros
+// Receive & Fallback
 
 
 // Reference:
