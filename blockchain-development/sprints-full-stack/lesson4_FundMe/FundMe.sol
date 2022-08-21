@@ -186,6 +186,17 @@ contract FundMe {
 // Custom Erros
 // Receive & Fallback
 
+// Future to cover
+// 1. Enums
+// 2. Events
+// 3. Try/Catch
+// 4. Function Selectors
+// 5. abi.encode/decode
+// 6. Hashing
+// 7. Yul/ Assembly
+
+
+
 
 // Reference:
 /*
