@@ -40,3 +40,15 @@ Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_
 ```shell
 npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
 ```
+
+
+================================================================
+## Import from npm
+* `yarn add --dev @chainlink/contracts`
+
+## hardhat deploy
+* `yarn add --dev hardhat-deploy`
+* `yarn add --dev @nomiclabs/hardhat-ethers@npm:hardhat-deploy-ethers ethers`
+* `yarn hardhat deploy`
+
+## Mocking & helper-hardhat-config
