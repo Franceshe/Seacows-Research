@@ -15,3 +15,6 @@
 ## surya: for visulize solidity code
 *`surya graph contracts/**/*.sol | dot -Tpng > MyContract.png`
 
+## Need fix: verify on testnet failed
+* `yarn hardhat run scripts/deploy.js --network georli                    `
+* `yarn hardhat run scripts/deploy.js --network georli --show-stack-traces`
