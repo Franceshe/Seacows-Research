@@ -53,3 +53,33 @@ npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
 
 ## Mocking & helper-hardhat-config
 * What is mocking -> stack overflow 
+* only deploy mocks: `yarn hardhat deploy --tags`
+
+
+## Utils Folders
+
+
+## Deploy on testnet: georli
+➜  lesson7_Hardhat_FundMe git:(main) ✗ yarn hardhat deploy --network goerli
+```
+yarn run v1.22.10
+warning ../../../../../package.json: No license field
+$ /Users/siyunhe/project/Seacows-Research/blockchain-development/sprints-full-stack/lesson7_Hardhat_FundMe/node_modules/.bin/hardhat deploy --network goerli
+Nothing to compile
+----------------------------------------------------
+Deploying FundMe and waiting for confirmations...
+deploying "FundMe"^C
+
+.......
+Takes forever, check back later 
+```
+
+## Solidity
+### Solidity style guide
+* Order of Layout
+
+## Testing
+* staging test: ccan be done on testnet[LAST STOP!]
+* Unit tests are done locally
+- local hardhat
+- fordked hardhat -> later
