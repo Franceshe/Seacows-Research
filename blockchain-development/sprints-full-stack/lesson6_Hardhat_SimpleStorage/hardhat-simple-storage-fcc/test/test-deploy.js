@@ -22,6 +22,7 @@ describe("SimpleStorage", function(){
     // assert
     // expect
     assert.equal(currentValue.toString(), expectedValue)
+    //expect(currentValue.toString()).to.equal(expectedValue)
   })
 
   //it.only
