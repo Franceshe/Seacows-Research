@@ -22,15 +22,24 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
+
+ const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL   
+ const PRIVATE_KEY = process.env.PRIVATE_KEY
+
 module.exports = {
   solidity: "0.8.8",
   defaultNetwork: "hardhat",
   networks: {
-    ropsten: {
-      url: process.env.ROPSTEN_URL || "",
+    goerli: {
+      url: process.env.GOERLI_RPC_URL    || "",
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
+    // ropsten: {
+    //   url: process.env.ROPSTEN_URL || "",
+    //   accounts:
+    //     process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    // },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
