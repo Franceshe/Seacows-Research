@@ -1,0 +1,15 @@
+Compiled 1 Solidity file successfully
+Deploying contract
+Deployed contract to 0x10D015C048D3883F9733aA9F65260CEeF76CFd6d
+Waiting for block txes...
+Verifying contract...
+Nothing to compile
+Successfully submitted source code for contract
+contracts/SimpleStorage.sol:SimpleStorage at 0x10D015C048D3883F9733aA9F65260CEeF76CFd6d
+for verification on the block explorer. Waiting for verification result...
+
+Successfully verified contract SimpleStorage on Etherscan.
+https://goerli.etherscan.io/address/0x10D015C048D3883F9733aA9F65260CEeF76CFd6d#code
+Current value is: 0
+Updated Value is :7
+✨  Done in 172.67s.
