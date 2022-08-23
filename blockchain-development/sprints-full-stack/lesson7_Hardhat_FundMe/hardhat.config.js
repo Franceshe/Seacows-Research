@@ -25,6 +25,8 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 
  const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL   
  const PRIVATE_KEY = process.env.PRIVATE_KEY
+ const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY
+ const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
 
 module.exports = {
   //solidity: "0.8.8",
@@ -34,13 +36,13 @@ module.exports = {
       {version: "0.6.6"},
     ]
   },
-
   defaultNetwork: "hardhat",
   networks: {
     goerli: {
-      url: process.env.GOERLI_RPC_URL    || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url:  GOERLI_RPC_URL,
+      accounts: [PRIVATE_KEY],
+      chainId: 5,
+      blockConfirmation: 6,
     },
     // ropsten: {
     //   url: process.env.ROPSTEN_URL || "",
@@ -48,9 +50,13 @@ module.exports = {
     //     process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     // },
   },
-  gasReporter: {
-    enabled: process.env.REPORT_GAS !== undefined,
+  gasReporter:{
+    enabled: false, 
+    outputFile: "gas-report.txt",
+    noColors: true,
     currency: "USD",
+    coinMarketcap:COINMARKETCAP_API_KEY,
+    token: "MATIC", 
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,

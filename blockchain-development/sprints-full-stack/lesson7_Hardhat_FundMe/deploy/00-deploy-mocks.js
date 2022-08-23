@@ -27,7 +27,7 @@
 
 const { network } = require("hardhat")
 const {
-    developementChain,
+    developmentChains,
     DECIMALS,
     INITIAL_ANSWER,
 } = require("../helper-hardhat-config")
@@ -44,6 +44,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
             from: deployer,
             log: true,
             args: [DECIMALS, INITIAL_ANSWER],
+            waitConfirmations: network.config.waitConfirmations || 1, 
         })
 
         log("Mocks deployed!")
