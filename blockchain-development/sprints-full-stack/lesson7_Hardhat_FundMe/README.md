@@ -52,3 +52,4 @@ npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
 * `yarn hardhat deploy`
 
 ## Mocking & helper-hardhat-config
+* What is mocking -> stack overflow 
