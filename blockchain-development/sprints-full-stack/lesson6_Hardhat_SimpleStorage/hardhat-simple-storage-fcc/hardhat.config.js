@@ -1,6 +1,7 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config()
 require("@nomiclabs/hardhat-etherscan")
+require("./tasks/block-number")
 
 
 /** @type import('hardhat/config').HardhatUserConfig */
@@ -20,7 +21,7 @@ module.exports = {
       chainId: 5,
     },
   },
-  solidity: "0.8.8",
+  solidity: "0.8.8", 
   etherscan:{
     apiKey: ETHERSCAN_API_KEY
   }

@@ -41,8 +41,9 @@ async function main(){
 }
 
   //automatic verify
-  // won't work on thihs verify func with local(hardhat) network
-async function verify(contractAddress, args){
+  // won't work on thihs verify func with local(hardhat) network 
+ //async function verify(contractAddress, args){  => which is equivalent to the following line: function being varible
+const verify = async(contractAddress, args) => {  
   // works on etherscan -> or do it with explore api
   // verify contract programmatically
   // hardhat plugin! hardhat-etherscan plugin :)
