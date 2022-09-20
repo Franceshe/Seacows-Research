@@ -3,7 +3,7 @@ require("dotenv").config()
 require("@nomiclabs/hardhat-etherscan")
 require("./tasks/block-number")
 require("hardhat-gas-reporter")
-
+require("solidity-coverage")
 
 /** @type import('hardhat/config').HardhatUserConfig */
 
@@ -19,7 +19,7 @@ const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY
 
 module.exports = {
   //defaultNetwork: "hardhat": with automative private key and rpc url
-  // better be specific
+  // better be specific 
   defaultNetwork: "hardhat",
   networks: {
     goerli:{

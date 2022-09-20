@@ -1,12 +1,17 @@
 // imports
 //const {ethers} = require('ethers');
 // run allows us to run any hardhat tasks
-const {ethers, run, network} = require("hardhat")
 
+//JS
+const { ethers, run, network } = require("hardhat")
 
+//TS
+//import { ethers, run, network } = from "hardhat";
+
+// Stopped TS Here
 
 // async main 
-async function main(){
+async function main() {
   const SimpleStorageFactory = await ethers.getContractFactory("SimpleStorage")
   console.log("Deploying contract");
   const simpleStorage = await SimpleStorageFactory.deploy()
@@ -21,7 +26,7 @@ async function main(){
   //console.log(network.config)
 
   // verify on Testnet on georli
-  if(network.config.chainId === 5 && process.env.ETHERSCAN_API_KEY){
+  if (network.config.chainId === 5 && process.env.ETHERSCAN_API_KEY) {
     console.log("Waiting for block txes...")
     // give some time for etherscan to include it in block
     await simpleStorage.deployTransaction.wait(6);
@@ -40,33 +45,33 @@ async function main(){
 
 }
 
-  //automatic verify
-  // won't work on thihs verify func with local(hardhat) network 
- //async function verify(contractAddress, args){  => which is equivalent to the following line: function being varible
-const verify = async(contractAddress, args) => {  
+//automatic verify
+// won't work on thihs verify func with local(hardhat) network 
+//async function verify(contractAddress, args){  => which is equivalent to the following line: function being varible
+const verify = async (contractAddress, args) => {
   // works on etherscan -> or do it with explore api
   // verify contract programmatically
   // hardhat plugin! hardhat-etherscan plugin :)
   console.log("Verifying contract...")
   // if contract already being verifyed
-  try{
-  await run("verify:verify", {
-    address: contractAddress,
-    constructorArguments: args,
-  })
-  }catch (e){
-    if(e.message.toLowerCase().includes("already verified")){
+  try {
+    await run("verify:verify", {
+      address: contractAddress,
+      constructorArguments: args,
+    })
+  } catch (e) {
+    if (e.message.toLowerCase().includes("already verified")) {
       console.log("Already Verified")
     }
-    else{
+    else {
       console.log(e)
     }
   }
-  
+
 }
 
 // main
-main().then(() => process.exit(0)).catch((error) =>{
+main().then(() => process.exit(0)).catch((error) => {
   console.error(error);
   process.exit(1);
 });
