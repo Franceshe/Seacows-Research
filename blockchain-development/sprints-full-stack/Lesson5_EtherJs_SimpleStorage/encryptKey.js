@@ -1,14 +1,6 @@
-import {ethers} from "ethers";
-import * as fs from "fs-extra";
-import "dotenv/config";
-
-//yarn add typescript
-//yarn add ts-node
-//yarn add @types/fs-extra
-
-// const ethers = require("ethers");
-// const fs = require("fs-extra");
-// require("dotenv").config();
+const ethers = require("ethers");
+const fs = require("fs-extra");
+require("dotenv").config();
 
 async function main() {
   const wallet = new ethers.Wallet(process.env.PRIVATE_KEY);
