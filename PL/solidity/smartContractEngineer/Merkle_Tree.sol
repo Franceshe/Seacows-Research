@@ -29,3 +29,9 @@ contract MerkleProof{
     }
 
 } 
+
+/* Application of Merkee tree:
+* Merkle trees are useful in distributed systems where same data
+ should exist in multiple places. 
+ Merkle trees can also be used to check inconsistencies. 
+ */
