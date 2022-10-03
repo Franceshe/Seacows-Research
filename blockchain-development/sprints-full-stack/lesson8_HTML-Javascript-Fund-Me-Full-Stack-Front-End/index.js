@@ -10,9 +10,11 @@ import { abi, contractAddress } from "./constants.js"
 
 const connectButton = document.getElementById("connectButton")
 const fundButton = document.getElementById("fundButton")
+const balanceButton = document.getElementById("balanceButton")
+
 connectButton.onclick = connect
 fundButton.onclick = fund
-
+balanceButton.onclick = getBalance
 //console.log(ethers)
 
 // async function connect() {
