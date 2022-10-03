@@ -30,3 +30,4 @@ Full stack ^ Smart Contract(backend) + Html /javascript/websites stuff
 ### Todos
 
 - Listening for events and completed transaction
+- Reading from the blockchain
