@@ -44,7 +44,7 @@ async function connect() {
 }
 
 async function fund() {
-  const ethAmount = "77"
+  const ethAmount = "0.1"
   console.log(`Funding with ${ethAmount}...`)
   if (typeof window.ethereum !== "undefined") {
     //provider / connection to the blockchain
@@ -54,13 +54,43 @@ async function fund() {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner()
     const contract = new ethers.Contract(contractAddress, abi, signer)
-    const transactionResponse = await contract.fund({
-      value: ethers.utils.parseEther(ethAmount),
-    })
+    try {
+      const transactionResponse = await contract.fund({
+        value: ethers.utils.parseEther(ethAmount),
+      })
+      // hey, wait for this TX to finish
+      await listenForTransactionMine(transactionResponse, provider)
+      console.log("Done")
+      // listen for the tx to be mined
+      // listened for the event <- we haven't learned about the event yet?
+    } catch (error) {
+      console.log(error)
+    }
 
     //console.log(signer)
   }
 }
+
+function listenForTransactionMine(transactionResponse, provider) {
+  console.log(`Mining ${transactionResponse.hash}...`)
+  //return new Promise()
+  // create a listener for the blockchain
+  // listen for this transaction to finish
+  //provider.once(eventName, listener) -> etherjs docs
+
+  // we want to wait the following whole thing to finish
+  // thus create a promis -> event loop
+  return new Promise((resolve, reject) => {
+    provider.once(transactionResponse.hash, (transactionReceipt) => {
+      console.log(
+        `Completed with ${transactionReceipt.confirmations} confirmations `
+      )
+      resolve()
+    })
+    //() => {} represent anonymous function
+  })
+}
+
 // fund functiona
 
 // withdraw function
